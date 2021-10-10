@@ -7,7 +7,8 @@ const FETCH_MOVIES = gql`{
     films{
       title
       episodeID
-      
+      releaseDate
+      openingCrawl
     }
   }
 }`

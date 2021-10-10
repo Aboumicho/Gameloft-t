@@ -1,23 +1,16 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import getMovies from '../queries/movies';
+import { StyleSheet, Text, View, Button } from 'react-native';
 
-export default function Home() {
-    const { loading, error, data } = getMovies()
-    
-    if(data){
-        console.log("DATA ", data)
-    }
-    else if(loading){
-        return <Text>LOADING...</Text>
-    }else if(error){
-        console.log("Error: ", error)
-    }
+export default function LikedCharacters({navigation}) {
 
     return (
     <View style={styles.container}>
       <Text>Open up App.js to start working on your app!</Text>
+      <Button
+        title="Go to Details"
+        onPress={() => navigation.navigate('Episodes')}
+      />
       <StatusBar style="auto" />
     </View>
   );
