@@ -11,7 +11,7 @@ import Episodes from '../screens/Home/Episodes';
 import LikedCharacters from '../screens/Home/LikedCharacters';
 import Episode from '../components/Episode';
 import Movie from '../screens/Movie';
-import { CharacterInfo } from '../screens/CharacterInfo';
+import CharacterInfo  from '../screens/CharacterInfo';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();

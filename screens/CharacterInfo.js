@@ -2,11 +2,20 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableHighlight, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import { useSelector, useDispatch } from 'react-redux';
 
-export const CharacterInfo = ({navigation, colorBackground, route}) =>{
+
+ const CharacterInfo = ({navigation, colorBackground, route}) =>{
     const {character} = route.params
-    let [like, setLike] = useState(false)
+    const likedCharacters = useSelector((state) => state.likedCharactersReducer.likedCharacters)
+    const dispatch = useDispatch();
+    console.log("CHARACTERINFO > LIKED CHARACTERS ", likedCharacters)
+    const findCharacterInList = likedCharacters.filter(likedCharacter => likedCharacter.key == character.name)
+    const INITIAL_STATE_LIKE = findCharacterInList && findCharacterInList.length > 0 ? true : false;
+    let [like, setLike] = useState(INITIAL_STATE_LIKE)
+    
     let likeButtonName = "thumbs-up-outline"
+    
     if( like){
          likeButtonName = "thumbs-up"
     }
@@ -20,7 +29,13 @@ export const CharacterInfo = ({navigation, colorBackground, route}) =>{
                 <View style={styles.titleLike}>
                 <Text style={styles.inTextTitle}>{character.name} </Text> 
                 <TouchableOpacity
-                onPress={() => setLike(prevLike => !prevLike)}
+                onPress={() => {
+                    setLike(prevLike => {
+                        const like = !prevLike
+                        like ? dispatch({type: "LIKED", payload: character}) : dispatch({type: "UNLIKED", payload: character})
+                        return  !prevLike
+                    })
+                }}
                 >
                     <Ionicons name={likeButtonName} size={60} color="blue" />
                 </TouchableOpacity>
@@ -51,3 +66,5 @@ const styles = StyleSheet.create({
         marginRight: 30
     }
 })
+
+export default CharacterInfo

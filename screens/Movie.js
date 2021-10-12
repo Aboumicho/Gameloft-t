@@ -2,6 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View } from 'react-native';
 import { Character } from '../components/Character';
+import { Ionicons } from '@expo/vector-icons';
+import { useSelector, useDispatch } from 'react-redux';
 
 export default function Movie({navigation, route}) {
 
@@ -12,6 +14,8 @@ export default function Movie({navigation, route}) {
     // console.log("episode.openingCrawl", episode.openingCrawl)
     let colorToggle=false
     let characters = episode.characterConnection.characters.slice().sort((a,b) =>  a.name > b.name && 1 || -1 )
+    const likedCharacters = useSelector((state) => state.likedCharactersReducer.likedCharacters)
+    const dispatch = useDispatch();
 
     return (
         <ScrollView style={{width:"100%", backgroundColor:"black"}} key={episode.episodeID}>   

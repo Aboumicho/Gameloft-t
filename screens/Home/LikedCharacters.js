@@ -1,26 +1,32 @@
 import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View, Button } from 'react-native';
+import { StyleSheet, Text, View, Button, ScrollView } from 'react-native';
+import { useSelector, useDispatch } from 'react-redux';
+import { Character } from '../../components/Character';
 
 export default function LikedCharacters({navigation}) {
-
+    const likedCharacters = useSelector((state) => state.likedCharactersReducer.likedCharacters)
+    const dispatch = useDispatch();
+    // console.log("LikedCharacters > likedCharacters >", likedCharacters)
+    let colorToggle=false
+    let characters = likedCharacters.slice().sort((a,b) =>  a.character.name > b.character.name && 1 || -1 )
     return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <Button
-        title="Go to Details"
-        onPress={() => navigation.navigate('Movie')}
-      />
+    <ScrollView style={styles.container} >
+        <View>
+            
+        </View>
+        {characters.map(likedCharacter => {
+            colorToggle = !colorToggle
+            let colorBackground = colorToggle ? "#312d05" : "#5a5737"    
+            return <Character navigation={navigation} character={likedCharacter.character} colorBackground={colorBackground} />
+        })}
       <StatusBar style="auto" />
-    </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "black"
   },
 });
