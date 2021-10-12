@@ -9,6 +9,31 @@ const FETCH_MOVIES = gql`{
       episodeID
       releaseDate
       openingCrawl
+      speciesConnection{
+        totalCount
+      }
+      planetConnection{
+        totalCount
+      }
+      vehicleConnection{
+        totalCount
+      }
+      characterConnection{
+        characters{
+          name
+          height
+          gender
+          hairColor
+          homeworld{
+            name
+          }
+          mass
+          species{
+            name
+            classification
+          }
+        }
+      }
     }
   }
 }`

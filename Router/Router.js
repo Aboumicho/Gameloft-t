@@ -10,6 +10,8 @@ import Home from '../screens/Home/Home';
 import Episodes from '../screens/Home/Episodes';
 import LikedCharacters from '../screens/Home/LikedCharacters';
 import Episode from '../components/Episode';
+import Movie from '../screens/Movie';
+import { CharacterInfo } from '../screens/CharacterInfo';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -22,7 +24,15 @@ export default function Router() {
                 component={Home}
                 options={{ headerShown: false }}
             ></Stack.Screen>
+            <Stack.Screen 
+                name="Movie"
+                component={Movie}
 
+            />
+            <Stack.Screen 
+                name="Character"
+                component={CharacterInfo}
+            />
         </Stack.Navigator>
     </NavigationContainer>
   );

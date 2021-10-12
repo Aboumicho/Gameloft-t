@@ -9,7 +9,7 @@ export default function LikedCharacters({navigation}) {
       <Text>Open up App.js to start working on your app!</Text>
       <Button
         title="Go to Details"
-        onPress={() => navigation.navigate('Episodes')}
+        onPress={() => navigation.navigate('Movie')}
       />
       <StatusBar style="auto" />
     </View>
