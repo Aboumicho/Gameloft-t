@@ -15,6 +15,7 @@ export default function Movie({navigation, route}) {
     let colorToggle=false
     let characters = episode.characterConnection.characters.slice().sort((a,b) =>  a.name > b.name && 1 || -1 )
     const likedCharacters = useSelector((state) => state.likedCharactersReducer.likedCharacters)
+
     const dispatch = useDispatch();
 
     return (
@@ -29,8 +30,10 @@ export default function Movie({navigation, route}) {
             <Text style={styles.inTextTitle}>Characters</Text>
             {characters.map(character => {
                 colorToggle = !colorToggle
-                let colorBackground = colorToggle ? "#312d05" : "#5a5737"                
-                return<Character key={character.id} character={character} colorBackground={colorBackground} navigation={navigation}/> })} 
+                let colorBackground = colorToggle ? "#312d05" : "#5a5737"
+                const findCharacterInList = likedCharacters.filter(likedCharacter => likedCharacter.key == character.name)
+                const likedCharacter = findCharacterInList && findCharacterInList.length > 0 ? true : false;                
+                return(<Character likedCharacter={likedCharacter} key={character.id} character={character} colorBackground={colorBackground} navigation={navigation}/>) })} 
         </ScrollView>
 
   );

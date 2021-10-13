@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState } from 'react';
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-export const Character = ({navigation, character, colorBackground}) =>{
+export const Character = ({navigation, character, colorBackground, likedCharacter}) =>{
 
     return(
     <TouchableOpacity key={character.id} style={{backgroundColor:colorBackground, width:"90%", marginLeft:"5%", opacity: 1}} 
@@ -10,9 +10,9 @@ export const Character = ({navigation, character, colorBackground}) =>{
         character: character
     })}
     >
-        <Text style={styles.inTextTitle}><Ionicons name="body"  color="#FFC000" size={22}/>{character.name}</Text>
+        <Text style={styles.inTextTitle}><Ionicons name="body"  color="#FFC000" size={22}/>{character.name} {likedCharacter ? <Ionicons name="heart" color="red" size={30} /> : null} </Text>
         <Text style={styles.inText}><Ionicons name="pin"  color="#65000B" size={16}/> {character.homeworld.name} </Text>
-
+        
     </TouchableOpacity>
     )
 }
